@@ -1,0 +1,578 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cubrimiento de Agua en El Alto</title>
+        <style>
+            /* Estilos globales */
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                color: white;
+                background-image: url('https://static.vecteezy.com/system/resources/previews/000/516/987/non_2x/vector-elegant-black-background.jpg');
+                background-size: cover;
+                background-position: center center;
+                scroll-behavior: smooth;
+            }
+
+            header {
+                position: fixed;
+                width: 100%;
+                top: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 1000;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 50px;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 20px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .nav-links li a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+
+            .icons img {
+                height: 40px;
+                margin-left: 20px;
+            }
+
+            .hero {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: white;
+            }
+
+            .hero-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 80%;
+                max-width: 1200px;
+            }
+
+            .hero-content img {
+                width: 55%;
+                max-width: 700px;
+            }
+
+            .hero-content div {
+                text-align: right;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+                margin: 0;
+            }
+
+            .hero-content h2 {
+                font-size: 2.5rem;
+                margin: 10px 0;
+            }
+
+            section {
+                padding: 40px;
+                text-align: center;
+                margin-bottom: 40px;
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+            }
+
+            .section-container {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            #intro {
+                flex: 1 1 45%;
+                padding: 20px;
+                background-color: rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+                margin-right: 10px;
+                color: white;
+            }
+
+            .table-container {
+                flex: 1 1 45%;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                color: black;
+                overflow-x: auto;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+
+            th, td {
+                padding: 12px;
+                text-align: center;
+                border: 1px solid #0e0d0d;
+            }
+
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            td {
+                background-color: #fdfdfd;
+            }
+
+            tr:nth-child(even) td {
+                background-color: #f2f2f2;
+            }
+
+            footer {
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            input, textarea, button {
+                margin: 10px 0;
+                padding: 10px;
+                font-size: 16px;
+                width: 300px;
+            }
+
+            button {
+                background-color: #333;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #555;
+            }
+
+            #searchBox {
+                display: none;
+                margin-left: 10px;
+            }
+
+            #searchBox input {
+                padding: 10px;
+                font-size: 16px;
+                width: 200px;
+            }
+
+            /* Estilos de la sección de contacto */
+            #contacto {
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 40px;
+                border-radius: 10px;
+                margin-top: 50px;
+            }
+
+            .contacto-form input, .contacto-form textarea {
+                margin-bottom: 15px;
+            }
+
+            /* Estilos para la nueva sección "Represas" */
+            #represas {
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 40px;
+                border-radius: 10px;
+                margin-top: 50px;
+            }
+
+            .represa-section {
+                margin-bottom: 20px;
+            }
+
+            .represa-section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+
+            .represa-section ul {
+                list-style: none;
+                padding: 0;
+                color: white;
+            }
+
+            .represa-section ul li {
+                font-size: 1.2rem;
+                margin-bottom: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Barra de navegación -->
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9JZ9GcoPtN8Q9H4z2at7SP1PCR1jbIIsEkQ&s" alt="Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">INICIO</a></li>
+                    <li><a href="#represas">REPRESAS</a></li>
+                    <li><a href="#datos">DATOS</a></li>
+                    <li><a href="#distribucion">DISTRIBUCION</a></li>
+                    <li><a href="#precios">PRECIOS</a></li>
+                    <li><a href="#resultados">RESULTADOS</a></li>
+                    <li><a href="#informacion">INFORMACION</a></li>
+                </ul>
+                <div class="icons">
+                    <!-- Icono de chat -->
+                    <a href="#contacto">
+                        <img src="https://img.icons8.com/ios7/600/FFFFFF/contacts.png" alt="Chat">
+                    </a>
+                    <!-- Icono de búsqueda con funcionalidad para mostrar/ocultar el campo de búsqueda -->
+                    <a href="#" id="searchIcon">
+                        <img src="https://st3.depositphotos.com/1507819/32085/v/380/depositphotos_320853210-stock-illustration-magnifier-vector-icon-on-black.jpg" alt="Buscar">
+                    </a>
+                    <div id="searchBox">
+                        <input type="search" id="searchInput" placeholder="Buscar...">
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sección Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <img src="https://abi.bo/images/2024/Marzo/06/El_Alto_2.jpg" alt="Imagen de agua">
+                <div>
+                    <h1>cobertura del servicio de agua potable en EL ALTO</h1>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secciones del estudio -->
+        <section id="inicio">
+                <h1>INICIO</h1>
+                <p>El dato de 2024 es una proyección basada en el crecimiento estimado de El Alto desde el censo de 2012. La población proyectada en 2024 es de aproximadamente 976,100 habitantes, calculada usando la tasa de crecimiento anual de 1.14%</li>
+            </div>
+
+            <!-- Tabla de Censo Poblacional de El Alto -->
+            <div class="table-container">
+                <table>
+                    <caption>Censo Poblacional de El Alto</caption>
+                    <thead>
+                        <tr>
+                            <th>Año Censo</th>
+                            <th>Población de El Alto</th>
+                            <th>Fuente o Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1950</td>
+                            <td>18,703</td>
+                            <td>primer censo poblacional</td>
+                        </tr>
+                        <tr>
+                            <td>1976</td>
+                            <td>95,145</td>
+                            <td>Censo de 1976</td>
+                        </tr>
+                        <tr>
+                            <td>1992</td>
+                            <td>306,900</td>
+                            <td>Censo de 1992</td>
+                        </tr>
+                        <tr>
+                            <td>2001</td>
+                            <td>586,000</td>
+                            <td>Censo de 2001</td>
+                        </tr>
+                        <tr>
+                            <td>2012</td>
+                            <td>874,084</td>
+                            <td>Censo de 2012</td>
+                        </tr>
+                        <tr>
+                            <td>2024 (Proyección)</td>
+                            <td>976,100</td>
+                            <td>Proyección de 2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Sección de Represas -->
+        <section id="represas">
+            <div class="represa-section" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="flex: 1;">
+                    <img src="https://www.epsas.com.bo/web/wp-content/uploads/2024/05/img_65f1a4bd11dc2.jpg" alt="Represa Milluni" style="width: 100%; max-width: 500px;">
+                </div>
+                <div style="flex: 1; text-align: left; padding-left: 20px;">
+                    <h2>Represa Milluni</h2>
+                    <ul>
+                        <li><strong>Ubicación:</strong> Distrito 13 del municipio de El Alto.</li>
+                        <li><strong>Fuente de abastecimiento:</strong> Laguna Jankho Khota y lluvias.</li>
+                        <li><strong>Capacidad de almacenamiento:</strong> Aproximadamente 10,8 millones m³.</li>
+                        <li><strong>Embalses:</strong> Milluni Bajo (para riego y consumo animal) y Milluni (para agua potable).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="represa-section" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 2; text-align: left; padding-right: 20px;">
+                    <h2>Represa Tuni</h2>
+                    <ul>
+                        <li><strong>Ubicación:</strong> Cerca de El Alto, en La Paz, Bolivia</li>
+                        <li><strong>Fuente de abastecimiento:</strong> Proviene del río Tuni</li>
+                        <li><strong>Capacidad de almacenamiento:</strong> aproximadamente 6 millones m³.</li>
+                        <li><strong>Embalses:</strong> Abastece de agua potable a El Alto y La Paz, además de apoyar el riego agrícola</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 2; text-align: right;">
+                    <img src="https://www.noticiasfides.com/images/news/2023/09/c-represa-tuni-condoriri-foto-rrss_1694047166.jpg" alt="Represa Tuni" style="width: 100%; max-width: 500px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Nueva sección de Datos -->
+        <section id="datos">
+            <h2>Datos de los Niveles de Agua</h2>
+            <p>A continuación, se presenta una comparación de los niveles de los embalses Tuni y Milluni entre septiembre de 2023 y septiembre de 2022:</p>
+
+            <div class="table-container">
+                <table class="styled-table">
+                    <caption>Comparación de Embalses - Septiembre 2023 y 2022</caption>
+                    <thead>
+                        <tr>
+                            <th>Embalse</th>
+                            <th>Septiembre 2023 (m³)</th>
+                            <th>Septiembre 2022 (m³)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tuni</td>
+                            <td>12.632.037 m³ (51,26%)</td>
+                            <td>13.281.345 m³ (53,89%)</td>
+                        </tr>
+                        <tr>
+                            <td>Milluni</td>
+                            <td>2.138.757 m³ (25,54%)</td>
+                            <td>3.208.689 m³ (38,31%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section id="datos">
+            <h2>Desviacion Estandar</h2>
+            <div class="table-container">
+                <table class="styled-table">
+                    <caption>Estadísticas de Embalses</caption>
+                    <thead>
+                        <tr>
+                            <th>Embalse</th>
+                            <th>Media (m³)</th>
+                            <th>Mediana (m³)</th>
+                            <th>Varianza</th>
+                            <th>Desviación Estándar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tuni</td>
+                            <td>12.956.691</td>
+                            <td>12.956.691</td>
+                            <td>105.766.099.716</td>
+                            <td>10.292.717</td>
+                        </tr>
+                        <tr>
+                            <td>Milluni</td>
+                            <td>2.673.723</td>
+                            <td>2.673.723</td>
+                            <td>286.120.595.556</td>
+                            <td>16.908.548</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="distribucion">
+            <h4>Distribucion</h4>
+            <p>Según un análisis reciente realizado por la Alcaldía de El Alto, varios distritos aún enfrentan problemas significativos de acceso al agua potable. En total, 14 distritos fueron evaluados, y solo un número reducido cuenta con cobertura completa de agua.</p>
+            <div class="table-container right-aligned">
+                <table class="styled-table">
+                    <caption>Tipo de Agua por Distritos</caption>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Agua</th>
+                            <th>Cantidad de Distritos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Represa</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>Pozo</td>
+                            <td>6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+
+        <!-- Nueva sección de precios -->
+        <section id="precios">
+            <div class="precios-seccion" style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="flex: 1;">
+                    <img src="https://www.la-razon.com/wp-content/uploads/2022/11/04/06/EPSAS-agua.jpg" alt="Represa Milluni" style="width: 100%; max-width: 500px;">
+                </div>
+                <div style="flex: 1; text-align: left; padding-left: 20px;">
+                <h2>Precios</h2>
+                <p>El precio del metro cúbico de agua en EPSAS (Empresa Pública Social de Agua y Saneamiento) puede variar dependiendo de varios factores, como el tipo de usuario (doméstico, comercial, industrial), la zona y el volumen consumido.
+                    Sin embargo, según información general disponible, los precios para usuarios residenciales en La Paz y El Alto se encuentran en el rango de:
+                    Tarifa básica: Aproximadamente Bs 9 a Bs 10 por metro cúbico para el consumo residencial básico.
+                    Tarifa para mayor consumo: Para consumos superiores, las tarifas pueden aumentar dependiendo del volumen y de la categoría del usuario, represa el Tuni Condoriri (Censo 2012) EPSAS 2018-2022
+                    </p>
+            </section></p>
+        </section>
+            <!-- Nueva sección de resultados -->
+            <section id="resultados">
+                <h2>Resultados</h2>
+                <p>El Alto enfrenta importantes desafíos en cuanto al acceso y distribución del agua potable, especialmente en sus diferentes distritos. A pesar del crecimiento de la ciudad, muchas áreas siguen dependiendo de pozos, como los Distritos 1, 2 y 3, lo que refleja la falta de infraestructura adecuada. En el Distrito 5, el suministro de agua proviene de fuentes mixtas, incluyendo pozos y represas, lo que genera un acceso inestable en algunas zonas. Por otro lado, distritos como el 4, 6, 8 y 13 tienen acceso a agua de represas, lo que garantiza un suministro más constante y seguro. Sin embargo, la falta de documentación y planificación en algunas zonas periurbanas limita el progreso en la cobertura de agua.
+
+                    Crecimiento Demográfico y sus Implicaciones                  
+                    El Alto continúa experimentando un crecimiento acelerado, con una población proyectada de 976,100 habitantes en 2024. Este aumento en la población genera presión sobre los servicios básicos, como el agua, lo que requiere mejoras en la infraestructura. El crecimiento en áreas periurbanas como Achocalla y Mecapaca también plantea desafíos para la distribución eficiente de agua en estas zonas emergentes.                   
+                    Suministro de Agua en las Represas Tuni y Milluni                    
+                    Las represas Tuni y Milluni, fuentes clave de agua para El Alto, han mostrado niveles decrecientes, especialmente en Milluni, que disminuyó del 38,31% al 25,54% de su capacidad en un año. Aunque Tuni ha tenido un descenso menos significativo, estas caídas reflejan la creciente presión sobre los recursos hídricos de la región.                    
+                    Cobertura de Conexiones de Agua                    
+                    A pesar de los desafíos, se ha observado un incremento en las conexiones de agua potable en El Alto. Desde 2017 hasta 2023, el número de conexiones ha crecido significativamente, con más de 1.4 millones de conexiones registradas en 2023, lo que indica avances en la cobertura de agua, especialmente en áreas urbanas.                  
+                    Precios del Agua y Desigualdad de Acceso                   
+                    Los precios del agua varían entre Bs 9 y Bs 10 por metro cúbico para consumo básico, aunque pueden aumentar según el volumen consumido. Este costo puede ser una barrera para las familias de bajos recursos, especialmente en áreas con acceso limitado o intermitente al suministro.
+                    Distribución Desigual del Suministro de Agua
+                    Las zonas periurbanas y rurales de El Alto, como Viacha, Achocalla y Laja, siguen enfrentando una cobertura insuficiente de agua, dependiendo de fuentes alternativas como pozos. En contraste, las áreas más urbanizadas, como el Distrito 6, tienen un suministro más confiable, lo que resalta la desigualdad en el acceso al agua entre las zonas urbanas y periurbanas</p>
+                    <div class="table-container">
+                        <table class="styled-table">
+                            <caption>Estadísticas de Abastecimiento de Agua</caption>
+                            <thead>
+                                <tr>
+                                    <th>Tema</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Desafíos en el Abastecimiento de Agua</td>
+                                    <td>
+                                        - Distritos 1, 2 y 3 dependen de pozos, sin acceso a represas.<br>
+                                        - Distrito 5 tiene un suministro mixto entre pozos y represas, lo que genera acceso inestable.<br>
+                                        - Distritos 4, 6, 8 y 13 tienen acceso a agua de represas, garantizando un suministro más constante.<br>
+                                        - La falta de documentación y planificación limita la mejora en zonas periurbanas.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Crecimiento Demográfico y sus Implicaciones</td>
+                                    <td>
+                                        - Población proyectada de 976,100 habitantes en 2024, lo que aumenta la presión sobre los servicios básicos.<br>
+                                        - Expansión en áreas periurbanas como Achocalla y Mecapaca, que requiere ajustes en la distribución de agua.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Suministro de Agua en las Represas Tuni y Milluni</td>
+                                    <td>
+                                        - Los niveles de agua en Milluni disminuyeron de 38,31% a 25,54% en un año, reflejando la presión sobre los recursos hídricos.<br>
+                                        - Tuni mostró una reducción menor, de 53,89% a 51,26%, pero sigue siendo clave para El Alto y La Paz.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cobertura de Conexiones de Agua</td>
+                                    <td>
+                                        - Se ha incrementado el número de conexiones, con más de 1.4 millones en 2023, destacando avances en la cobertura de agua.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Precios del Agua y Desigualdad de Acceso</td>
+                                    <td>
+                                        - El costo varía entre Bs 9 y Bs 10 por metro cúbico, lo que puede ser una barrera para las familias de bajos recursos.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Distribución Desigual del Suministro de Agua</td>
+                                    <td>
+                                        - Las zonas periurbanas como Viacha, Achocalla y Laja dependen de pozos, con cobertura insuficiente.<br>
+                                        - Las zonas urbanizadas como el Distrito 6 tienen un suministro más confiable, generando desigualdad.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Nueva sección de infromacion-->
+            <section id="informacion">
+                <h2>Información</h2>
+                <p>En esta sección podrás acceder a diversos recursos relacionados con el abastecimiento de agua en El Alto, así como otras fuentes oficiales de información.</p>
+
+                <ul>
+                    <li><a href="http://www.epsas.com.bo" target="_blank">Sitio Oficial de EPSAS</a> Accede a la página de la Empresa Pública Social de Agua y Saneamiento (EPSAS) para obtener información sobre el abastecimiento de agua y proyectos en la ciudad de El Alto y La Paz.</li>
+                    <li><a href="https://www.ine.gov.bo" target="_blank">Censo Nacional de Población y Vivienda - INE</a> Consulta los resultados del último censo nacional, que ofrece información demográfica crucial para el planeamiento de los servicios básicos, incluido el agua.</li>
+                    <li><a href="https://www.elalto.gob.bo" target="_blank">Gobierno Autónomo Municipal de El Alto</a>  Visita la página oficial del municipio de El Alto para conocer más sobre la infraestructura urbana, los proyectos de agua, y las políticas locales relacionadas con el abastecimiento de agua.</li>
+                </ul>
+            </section>
+            </section>
+    <!-- Sección de contacto -->
+    <section id="contacto">
+        <h2>Contáctanos</h2>
+        <form action="#" method="POST">
+            <input type="text" placeholder="Tu Nombre" required>
+            <input type="email" placeholder="Tu Correo" required>
+            <textarea placeholder="Tu Mensaje" rows="5" required></textarea>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Mostrar u ocultar el campo de búsqueda al hacer click en el icono
+        document.getElementById("searchIcon").addEventListener("click", function() {
+            const searchBox = document.getElementById("searchBox");
+            searchBox.style.display = searchBox.style.display === "none" || searchBox.style.display === "" ? "block" : "none";
+        });
+    </script>
+    </body>
+    </html>
